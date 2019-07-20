@@ -1,3 +1,39 @@
+
+# Binaries
+src/*.o
+src/*.so
+
+# The following are imported from chickenwire lib
+src/chunker.h
+src/csv.h
+src/edge.h
+src/filter_layer.h
+src/graph.h
+src/random_graph.h
+src/random_walk.h
+src/rcpp_graph_store.h
+src/stepper.h
+src/types.h
+src/vertex.h
+src/shortest_path.h
+src/shortest_path.cpp
+src/RcppExports.cpp
+src/filter_layer.cpp
+src/random_walk.cpp
+src/degree_distribution.h
+src/degree_distribution.cpp
+src/weigh_edges.h
+src/weigh_edges.cpp
+src/connected_components.cpp
+src/connected_components.h
+
+# Built packages
+*.tar.gz
+
+# Results of running R CMD check on package
+*.Rcheck
+
+
 # History files
 .Rhistory
 .Rapp.history

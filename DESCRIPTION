@@ -1,0 +1,13 @@
+Package: chickenwire
+Type: Package
+Title: What the Package Does in One 'Title Case' Line
+Version: 0.1
+Date: 2019-05-07
+Author: Jan van der Laan
+Maintainer: Jan van der Laan <jan@knowledge-arcana.nl>
+Description: One paragraph description of what the package does as one or more full sentences.
+Encoding: UTF-8
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.1), methods
+LinkingTo: Rcpp
+RoxygenNote: 6.1.1

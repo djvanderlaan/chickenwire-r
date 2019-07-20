@@ -1,0 +1,3 @@
+[submodule "chickenwire"]
+	path = chickenwire
+	url = git@github.com:djvanderlaan/chickenwire.git
