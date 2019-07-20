@@ -8,7 +8,8 @@ copy_lib: $(addprefix chickenwire/include/, $(lib_headers)) $(addprefix, include
 	cp $(addprefix chickenwire/src/, $(lib_source)) src/
 
 clean:
-	rm -f $(addprefix src/, $(lib_headers)) $(addprefix src/, $(lib_source)) 
+	find ./src -type f ! -name 'rcpp_*' -delete
+	rm ./src/*.o ./src/*.so
 
 document:
 	Rscript  -e "roxygen2::roxygenise()"
