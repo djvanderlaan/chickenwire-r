@@ -1,3 +1,5 @@
 Makefile
 chickenwire.Rcheck
 chickenwire/
+*.tar.gz
+*.tar.rdata
