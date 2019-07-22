@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function build {
+  copy_lib
+  document
   echo "Building package"
   R CMD build ./
 }
