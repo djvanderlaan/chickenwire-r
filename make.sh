@@ -9,8 +9,8 @@ function build {
 
 function check {
   build
-  echo "Checking package"
   package=$(ls chickenwire*.tar.gz | tail -n 1)
+  echo "Checking package $package"
   R CMD check $package
 }
 

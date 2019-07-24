@@ -2,50 +2,50 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 rcpp_create_graph <- function(directed) {
-    .Call('_chickenwire_rcpp_create_graph', PACKAGE = 'chickenwire', directed)
+    .Call(`_chickenwire_rcpp_create_graph`, directed)
 }
 
 rcpp_add_vertices <- function(graph_id, id) {
-    invisible(.Call('_chickenwire_rcpp_add_vertices', PACKAGE = 'chickenwire', graph_id, id))
+    invisible(.Call(`_chickenwire_rcpp_add_vertices`, graph_id, id))
 }
 
 rcpp_add_edges <- function(graph_id, src, dst, wght, type, auto_add_vertex) {
-    invisible(.Call('_chickenwire_rcpp_add_edges', PACKAGE = 'chickenwire', graph_id, src, dst, wght, type, auto_add_vertex))
+    invisible(.Call(`_chickenwire_rcpp_add_edges`, graph_id, src, dst, wght, type, auto_add_vertex))
 }
 
 rcpp_delete_graph <- function(graph_id) {
-    invisible(.Call('_chickenwire_rcpp_delete_graph', PACKAGE = 'chickenwire', graph_id))
+    invisible(.Call(`_chickenwire_rcpp_delete_graph`, graph_id))
 }
 
 rcpp_delete_all_graphs <- function() {
-    invisible(.Call('_chickenwire_rcpp_delete_all_graphs', PACKAGE = 'chickenwire'))
+    invisible(.Call(`_chickenwire_rcpp_delete_all_graphs`))
 }
 
 rcpp_edges <- function(graph_id) {
-    .Call('_chickenwire_rcpp_edges', PACKAGE = 'chickenwire', graph_id)
+    .Call(`_chickenwire_rcpp_edges`, graph_id)
 }
 
 rcpp_local_average_cont <- function(graph_id, value, vwght) {
-    .Call('_chickenwire_rcpp_local_average_cont', PACKAGE = 'chickenwire', graph_id, value, vwght)
+    .Call(`_chickenwire_rcpp_local_average_cont`, graph_id, value, vwght)
 }
 
 rcpp_local_average_cat <- function(graph_id, value, vwght) {
-    .Call('_chickenwire_rcpp_local_average_cat', PACKAGE = 'chickenwire', graph_id, value, vwght)
+    .Call(`_chickenwire_rcpp_local_average_cat`, graph_id, value, vwght)
 }
 
 rcpp_graph_size <- function(graph_id) {
-    .Call('_chickenwire_rcpp_graph_size', PACKAGE = 'chickenwire', graph_id)
+    .Call(`_chickenwire_rcpp_graph_size`, graph_id)
 }
 
 rcpp_nvertices <- function(graph_id) {
-    .Call('_chickenwire_rcpp_nvertices', PACKAGE = 'chickenwire', graph_id)
+    .Call(`_chickenwire_rcpp_nvertices`, graph_id)
 }
 
 rcpp_is_directed <- function(graph_id) {
-    .Call('_chickenwire_rcpp_is_directed', PACKAGE = 'chickenwire', graph_id)
+    .Call(`_chickenwire_rcpp_is_directed`, graph_id)
 }
 
 rcpp_vertices <- function(graph_id) {
-    .Call('_chickenwire_rcpp_vertices', PACKAGE = 'chickenwire', graph_id)
+    .Call(`_chickenwire_rcpp_vertices`, graph_id)
 }
 

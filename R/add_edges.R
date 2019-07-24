@@ -20,7 +20,7 @@
 #'   of the edges. When omitted all edges have type 1. Should be of type integer.
 #' @param vertex_id_col name or number of the column from \code{vertices} containing
 #'   the id's of the vertices. Should contain integer values.
-#' @param auto_add_vertices automatically create vertices when an edge contains id's that
+#' @param add_vertices automatically create vertices when an edge contains id's that
 #'   do not exist yet. When \code{vertices} is given this parameter is set to \code{FALSE}.
 #'
 #' @details
@@ -46,7 +46,7 @@
 #'
 #' @export
 add_edges <- function(graph_id, edges, vertices, edge_src_col = 1, edge_dst_col = 2, 
-    edge_weight_col, edge_type_col, vertex_id_col = 1, auto_add_vertices = TRUE) {
+    edge_weight_col, edge_type_col, vertex_id_col = 1, add_vertices = TRUE) {
   # Check input
   stopifnot(methods::is(graph_id, "chickenwire"))
   stopifnot(is.integer(graph_id) && length(graph_id) == 1)
@@ -70,10 +70,12 @@ add_edges <- function(graph_id, edges, vertices, edge_src_col = 1, edge_dst_col 
     edge_type <- as.integer(as.factor(edge_type)) - 1
   check_edges(edge_src, edge_dst, edge_weight, edge_type)
 
-  rcpp_add_vertices(graph_id, vertex_id)
+  if (add_vertices) 
+    rcpp_add_vertices(graph_id, vertex_id)
   rcpp_add_edges(graph_id, edge_src, edge_dst, edge_weight, edge_type, FALSE)
   # TODO: store vertex ids with graph; we need those when we want to add
   # additional edges/vertices
+  # TODO: sequentially adding edges doesn't work well right now. 
   graph_id
 }
 

@@ -6,7 +6,7 @@
 \usage{
 add_edges(graph_id, edges, vertices, edge_src_col = 1,
   edge_dst_col = 2, edge_weight_col, edge_type_col, vertex_id_col = 1,
-  auto_add_vertices = TRUE)
+  add_vertices = TRUE)
 }
 \arguments{
 \item{graph_id}{the graph to which to add the edges and vertices. Should
@@ -36,7 +36,7 @@ of the edges. When omitted all edges have type 1. Should be of type integer.}
 \item{vertex_id_col}{name or number of the column from \code{vertices} containing
 the id's of the vertices. Should contain integer values.}
 
-\item{auto_add_vertices}{automatically create vertices when an edge contains id's that
+\item{add_vertices}{automatically create vertices when an edge contains id's that
 do not exist yet. When \code{vertices} is given this parameter is set to \code{FALSE}.}
 }
 \value{
