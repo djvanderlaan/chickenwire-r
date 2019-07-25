@@ -25,7 +25,7 @@ probability).}
 \item{nworkers}{number of threads to use during the calculation.}
 }
 \value{
-A data.frame. This first column contains the vertex id's.
+A data.frame. The rows correspond to the vertices.
 }
 \description{
 Local network averages

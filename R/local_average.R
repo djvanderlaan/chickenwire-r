@@ -12,7 +12,7 @@
 #' @param nworkers number of threads to use during the calculation.
 #'
 #' @return
-#' A data.frame. This first column contains the vertex id's. 
+#' A data.frame. The rows correspond to the vertices.
 #'
 #' @export
 local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha = 0.85, nstep_max = 200,
@@ -54,6 +54,11 @@ local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha =
   if (value_factor) {
     res <- rcpp_local_average_cat(graph_id, vertex_values, vertex_weights, alpha, 0L, nstep_max)
     res <- as.data.frame(res)
+    # when the highest levels are missing from the data set these are not 
+    # included in the results. Fix this
+    if (ncol(res) < length(value_name)) 
+      for (col in seq(ncol(res)+1L, length(value_name)))
+        res[[col]] <- 0.0
     names(res) <- value_name
   } else {
     res <- rcpp_local_average_cont(graph_id, vertex_values, vertex_weights, alpha, 0L, nstep_max)

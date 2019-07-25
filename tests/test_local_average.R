@@ -1,4 +1,4 @@
-cat("Local averate continuous\n")
+cat("Local average continuous\n")
 
 library(chickenwire)
 
@@ -35,7 +35,7 @@ rw <- local_average(g2, vertex_values = c(0, 1, 0, 0),
 stopifnot(all.equal(rw, c(1, 1, 1, NA)))
 cat(" OK\n")
 
-cat("Local averate categorical\n")
+cat("Local average categorical\n")
 
 cat("A")
 rw <- local_average(g2, vertex_values = c("A", "A", "A", "A"))
@@ -72,3 +72,17 @@ stopifnot(all.equal(tst, c(TRUE, TRUE, TRUE, NA)))
 cat(" OK\n")
 
 delete_graph(g2)
+
+
+
+cat("Local average regression tests\n")
+
+cat("A - non-occuring levels")
+data(ssi)
+g <- create_graph()
+g <- add_edges(g, ssi$edges, ssi$vertices)
+ssi$vertices$color <- factor(ssi$vertices$color, c("pink", "purple", "lilac"))
+local_average(g, ssi$vertices$color)
+cat(" OK\n")
+
+
