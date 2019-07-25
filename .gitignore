@@ -29,9 +29,14 @@ src/connected_components.h
 
 # Built packages
 *.tar.gz
+*.rdata
 
 # Results of running R CMD check on package
 *.Rcheck
+
+# Vim swapfiles
+*.swo
+*.swp
 
 
 # History files

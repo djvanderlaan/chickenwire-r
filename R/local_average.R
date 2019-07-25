@@ -11,7 +11,7 @@
 #' A data.frame. This first column contains the vertex id's. 
 #'
 #' @export
-local_average <- function(graph_id, vertex_values, vertex_weights = 1.0) {
+local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha = 0.85, nstep_max = 200) {
 
   stopifnot(methods::is(graph_id, "chickenwire"))
   stopifnot(is.integer(graph_id) && length(graph_id) == 1)
@@ -39,13 +39,19 @@ local_average <- function(graph_id, vertex_values, vertex_weights = 1.0) {
   }
   stopifnot(is.numeric(vertex_values) && length(vertex_values) == nvertices(graph_id))
   stopifnot(!any(is.na(vertex_values)))
+  # alpha
+  stopifnot(is.numeric(alpha) && length(alpha) == 1)
+  stopifnot(alpha >= 0 && alpha <= 1)
+  # nstep_max
+  stopifnot(is.numeric(nstep_max) && length(nstep_max) == 1)
+  stopifnot(nstep_max > 0)
   # random_walk
   if (value_factor) {
-    res <- rcpp_local_average_cat(graph_id, vertex_values, vertex_weights)
+    res <- rcpp_local_average_cat(graph_id, vertex_values, vertex_weights, alpha, 0L, nstep_max)
     res <- as.data.frame(res)
     names(res) <- value_name
   } else {
-    res <- rcpp_local_average_cont(graph_id, vertex_values, vertex_weights)
+    res <- rcpp_local_average_cont(graph_id, vertex_values, vertex_weights, alpha, 0L, nstep_max)
   }
   res
 }
