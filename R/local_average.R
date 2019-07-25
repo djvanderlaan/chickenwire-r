@@ -6,12 +6,17 @@
 #'   character values. 
 #' @param vertex_weights a vector with vertex weights. Should be numeric and 
 #'   have the same length as \code{vertex_values}. Optional.
+#' @param alpha probability of continuing the random walk (1-restart 
+#'   probability).
+#' @param nstep_max maximum number of iterations.
+#' @param nworkers number of threads to use during the calculation.
 #'
 #' @return
 #' A data.frame. This first column contains the vertex id's. 
 #'
 #' @export
-local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha = 0.85, nstep_max = 200) {
+local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha = 0.85, nstep_max = 200,
+   nworkers = available_cores() ) {
 
   stopifnot(methods::is(graph_id, "chickenwire"))
   stopifnot(is.integer(graph_id) && length(graph_id) == 1)

@@ -4,7 +4,8 @@
 \alias{local_average}
 \title{Local network averages}
 \usage{
-local_average(graph_id, vertex_values, vertex_weights = 1)
+local_average(graph_id, vertex_values, vertex_weights = 1,
+  alpha = 0.85, nstep_max = 200, nworkers = available_cores())
 }
 \arguments{
 \item{graph_id}{the graph to which to add the edges and vertices. Should
@@ -15,6 +16,13 @@ character values.}
 
 \item{vertex_weights}{a vector with vertex weights. Should be numeric and 
 have the same length as \code{vertex_values}. Optional.}
+
+\item{alpha}{probability of continuing the random walk (1-restart 
+probability).}
+
+\item{nstep_max}{maximum number of iterations.}
+
+\item{nworkers}{number of threads to use during the calculation.}
 }
 \value{
 A data.frame. This first column contains the vertex id's.

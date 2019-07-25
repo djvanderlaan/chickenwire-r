@@ -11,7 +11,7 @@ function check {
   build
   package=$(ls chickenwire*.tar.gz | tail -n 1)
   echo "Checking package $package"
-  R CMD check $package
+  R CMD check --as-cran $package
 }
 
 function clean {
