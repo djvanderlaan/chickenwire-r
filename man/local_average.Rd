@@ -5,7 +5,8 @@
 \title{Local network averages}
 \usage{
 local_average(graph_id, vertex_values, vertex_weights = 1,
-  alpha = 0.85, nstep_max = 200, nworkers = available_cores())
+  alpha = 0.85, nstep_max = 200, nworkers = available_cores(),
+  precision = 1e-05)
 }
 \arguments{
 \item{graph_id}{the graph to which to add the edges and vertices. Should
@@ -23,6 +24,9 @@ probability).}
 \item{nstep_max}{maximum number of iterations.}
 
 \item{nworkers}{number of threads to use during the calculation.}
+
+\item{precision}{when updates in the local averages are smaller than 
+\code{precision} the algorithm is stopped.}
 }
 \value{
 A data.frame. The rows correspond to the vertices.

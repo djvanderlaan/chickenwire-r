@@ -10,13 +10,15 @@
 #'   probability).
 #' @param nstep_max maximum number of iterations.
 #' @param nworkers number of threads to use during the calculation.
+#' @param precision when updates in the local averages are smaller than 
+#'   \code{precision} the algorithm is stopped.
 #'
 #' @return
 #' A data.frame. The rows correspond to the vertices.
 #'
 #' @export
 local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha = 0.85, nstep_max = 200,
-   nworkers = available_cores() ) {
+   nworkers = available_cores(), precision = 1E-5) {
 
   stopifnot(methods::is(graph_id, "chickenwire"))
   stopifnot(is.integer(graph_id) && length(graph_id) == 1)
@@ -50,9 +52,12 @@ local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha =
   # nstep_max
   stopifnot(is.numeric(nstep_max) && length(nstep_max) == 1)
   stopifnot(nstep_max > 0)
+  # precision
+  stopifnot(is.numeric(precision) && length(precision) == 1)
+  stopifnot(precision > 0 && precision <= 1)
   # random_walk
   if (value_factor) {
-    res <- rcpp_local_average_cat(graph_id, vertex_values, vertex_weights, alpha, nworkers, nstep_max)
+    res <- rcpp_local_average_cat(graph_id, vertex_values, vertex_weights, alpha, nworkers, nstep_max, precision)
     res <- as.data.frame(res)
     # when the highest levels are missing from the data set these are not 
     # included in the results. Fix this
@@ -61,7 +66,7 @@ local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha =
         res[[col]] <- 0.0
     names(res) <- value_name
   } else {
-    res <- rcpp_local_average_cont(graph_id, vertex_values, vertex_weights, alpha, nworkers, nstep_max)
+    res <- rcpp_local_average_cont(graph_id, vertex_values, vertex_weights, alpha, nworkers, nstep_max, precision)
   }
   res
 }
