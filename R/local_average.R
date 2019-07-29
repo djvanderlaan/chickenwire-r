@@ -58,6 +58,7 @@ local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha =
   # random_walk
   if (value_factor) {
     res <- rcpp_local_average_cat(graph_id, vertex_values, vertex_weights, alpha, nworkers, nstep_max, precision)
+    nstep <- attr(res, "nstep")
     res <- as.data.frame(res)
     # when the highest levels are missing from the data set these are not 
     # included in the results. Fix this
@@ -65,6 +66,7 @@ local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha =
       for (col in seq(ncol(res)+1L, length(value_name)))
         res[[col]] <- 0.0
     names(res) <- value_name
+    attr(res, "nstep") <- nstep
   } else {
     res <- rcpp_local_average_cont(graph_id, vertex_values, vertex_weights, alpha, nworkers, nstep_max, precision)
   }
