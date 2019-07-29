@@ -1,7 +1,7 @@
 Package: chickenwire
 Type: Package
 Title: What the Package Does in One 'Title Case' Line
-Version: 0.1.002
+Version: 0.1.003
 Date: 2019-07-23
 Author: Jan van der Laan
 Maintainer: Jan van der Laan <jan@knowledge-arcana.nl>

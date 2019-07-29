@@ -2,7 +2,9 @@
 
 S3method(print,chickenwire)
 export(add_edges)
+export(add_edges_raw)
 export(add_vertices)
+export(add_vertices_raw)
 export(create_graph)
 export(delete_all_graphs)
 export(delete_graph)
