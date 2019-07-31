@@ -75,7 +75,6 @@ add_edges <- function(graph_id, edges, vertices, edge_src_col = 1, edge_dst_col 
   rcpp_add_edges(graph_id, edge_src, edge_dst, edge_weight, edge_type, FALSE)
   # TODO: store vertex ids with graph; we need those when we want to add
   # additional edges/vertices
-  # TODO: sequentially adding edges doesn't work well right now. 
   graph_id
 }
 
