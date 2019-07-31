@@ -2,6 +2,9 @@
 #'
 #' @param graph_id the graph to which to add the edges and vertices. Should
 #'   be of type \code{chickenwire}.
+#' @param vertex_ids a vector with vertex ids. When omitted it is assumed that
+#'   the vertex values (\code{vertex_values}) are in the same order as used
+#'   internally.
 #' @param vertex_values a vector with vertex values. Can be numeric, factor or
 #'   character values. 
 #' @param vertex_weights a vector with vertex weights. Should be numeric and 
@@ -17,18 +20,28 @@
 #' A data.frame. The rows correspond to the vertices.
 #'
 #' @export
-local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha = 0.85, nstep_max = 200,
-   nworkers = available_cores(), precision = 1E-5) {
+local_average <- function(graph_id, vertex_ids, vertex_values, vertex_weights = 1.0, alpha = 0.85, 
+   nstep_max = 200, nworkers = available_cores(), precision = 1E-5) {
 
   stopifnot(methods::is(graph_id, "chickenwire"))
   stopifnot(is.integer(graph_id) && length(graph_id) == 1)
 
   # vertex_id
-  # TODO:
-  #if (is.factor(vertex_id) || is.character(vertex_id)) 
-    #vertex_id <- seq_along(vertex_id)-1L
-  #stopifnot(is.numeric(vertex_id) && length(vertex_id) >= 1)
-  #stopifnot(!any(is.na(vertex_id)))
+  order <- seq_along(vertex_values)
+  if (!missing(vertex_ids)) {
+    stopifnot(length(vertex_values) == length(vertex_ids))
+    ids <- attr(graph_id, "vertex_ids")
+    if (!is.null(ids)) {
+      order <- match(vertex_ids, ids)
+      if (anyNA(order)) stop("Unknown vertex ids.")
+    } else {
+      warning("graph_id doesn't store vertex ids. Therefore, provided argument vertex_ids is ignored.")
+    }
+  } else {
+    vertex_ids <- order - 1L
+    ids <- attr(graph_id, "vertex_ids")
+    if (!is.null(ids)) vertex_ids <- ids
+  }
   # vertex_weights
   stopifnot(is.numeric(vertex_weights) && length(vertex_weights) >= 1)
   stopifnot(length(vertex_weights == 1) || length(vertex_weights) == length(vertex_values))
@@ -66,9 +79,14 @@ local_average <- function(graph_id, vertex_values, vertex_weights = 1.0, alpha =
       for (col in seq(ncol(res)+1L, length(value_name)))
         res[[col]] <- 0.0
     names(res) <- value_name
+    res <- cbind(data.frame(vertex_id = vertex_ids), res[order, , drop = FALSE])
     attr(res, "nstep") <- nstep
   } else {
     res <- rcpp_local_average_cont(graph_id, vertex_values, vertex_weights, alpha, nworkers, nstep_max, precision)
+    nstep <- attr(res, "nstep")
+    res <- data.frame(vertex_id = vertex_ids, res = res[order])
+    names(res)[2] <- value_name
+    attr(res, "nstep") <- nstep
   }
   res
 }

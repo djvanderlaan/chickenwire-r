@@ -10,11 +10,13 @@ add_vertices(graph_id, vertices, vertex_id_col = 1L)
 \item{graph_id}{the graph to which to add the edges and vertices. Should
 be of type \code{chickenwire}.}
 
-\item{vertices}{a data.frame with vertices (optional). By default it is assumed that
-the first column contains the vertex id's (see \code{vertex_id_col}).}
+\item{vertices}{a data.frame or vector with vertices. By default it is assumed that
+the first column of the data.frame contains the vertex id's (see \code{vertex_id_col}). This
+column, or the vector supplied should of type \code{numeric}, \code{character} or 
+\code{factor}.}
 
 \item{vertex_id_col}{name or number of the column from \code{vertices} containing
-the id's of the vertices. Should contain integer values.}
+the id's of the vertices. Used when a data.frame is supplied for \code{vertices}.}
 }
 \value{
 Modifies \code{graph_id} and returns \code{graph_id}.

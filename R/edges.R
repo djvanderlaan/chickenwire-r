@@ -14,6 +14,11 @@ edges <- function(graph_id) {
   e <- rcpp_edges(graph_id)
   e <- as.data.frame(e)
   names(e) <- c("src", "dst", "weight", "type")
+  if (!is.null(attr(graph_id, "vertex_ids"))) {
+    vertex_ids <- attr(graph_id, "vertex_ids")
+    e$src <- vertex_ids[e$src + 1L]
+    e$dst <- vertex_ids[e$dst + 1L]
+  }
   e
 }
 

@@ -4,13 +4,17 @@
 \alias{local_average}
 \title{Local network averages}
 \usage{
-local_average(graph_id, vertex_values, vertex_weights = 1,
+local_average(graph_id, vertex_ids, vertex_values, vertex_weights = 1,
   alpha = 0.85, nstep_max = 200, nworkers = available_cores(),
   precision = 1e-05)
 }
 \arguments{
 \item{graph_id}{the graph to which to add the edges and vertices. Should
 be of type \code{chickenwire}.}
+
+\item{vertex_ids}{a vector with vertex ids. When omitted it is assumed that
+the vertex values (\code{vertex_values}) are in the same order as used
+internally.}
 
 \item{vertex_values}{a vector with vertex values. Can be numeric, factor or
 character values.}

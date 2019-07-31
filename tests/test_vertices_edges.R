@@ -7,11 +7,12 @@ data(ssi)
 
 cat("A")
 g <- create_graph(directed = TRUE)
-g <- add_edges(g, ssi$edges, ssi$vertices)
+g <- add_vertices(g, ssi$vertices)
+g <- add_edges(g, ssi$edges)
 
 v <- vertices(g)
 
-stopifnot(all.equal(v$id, seq_len(nrow(ssi$vertices))-1))
+stopifnot(all.equal(v$id, ssi$vertices$id))
 cat(" OK\n")
 
 cat("B")
@@ -21,10 +22,7 @@ cat(" OK\n")
 
 cat("C")
 e <- edges(g)
-
-ee <- data.frame(
-  src = match(ssi$edges$src, ssi$vertices$id)-1L,
-  dst = match(ssi$edges$dst, ssi$vertices$id)-1L)
+ee <- ssi$edges[c("src", "dst")]
 ee <- ee[order(ee$src, ee$dst), ]
 e <- e[order(e$src, e$dst), ]
 stopifnot(all.equal(ee$src, e$src))

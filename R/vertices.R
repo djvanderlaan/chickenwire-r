@@ -14,6 +14,9 @@ vertices <- function(graph_id) {
   v <- rcpp_vertices(graph_id)
   v <- as.data.frame(v)
   names(v) <- c("id", "type")
+  if (!is.null(attr(graph_id, "vertex_ids"))) {
+    v$id <- attr(graph_id, "vertex_ids")[v$id + 1L]
+  }
   v
 }
 

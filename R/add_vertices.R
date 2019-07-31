@@ -34,7 +34,7 @@ add_vertices <- function(graph_id, vertices, vertex_id_col = 1L) {
   } else if (is.data.frame(vertices)) {
     vertex_id <- vertices[[vertex_id_col]]
   }
-  stopifnot(is.numeric(vertices) || is.character(vertices) || is.factor(vertices))
+  stopifnot(is.numeric(vertex_id) || is.character(vertex_id) || is.factor(vertex_id))
   stopifnot(length(vertex_id) >= 1)
   stopifnot(!any(is.na(vertex_id)))
   stopifnot(!any(duplicated(vertex_id)))

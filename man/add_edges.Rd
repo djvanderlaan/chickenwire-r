@@ -4,9 +4,8 @@
 \alias{add_edges}
 \title{Add edges to graph}
 \usage{
-add_edges(graph_id, edges, vertices, edge_src_col = 1,
-  edge_dst_col = 2, edge_weight_col, edge_type_col, vertex_id_col = 1,
-  add_vertices = TRUE)
+add_edges(graph_id, edges, edge_src_col = 1, edge_dst_col = 2,
+  edge_weight_col, edge_type_col, auto_add_vertices = TRUE)
 }
 \arguments{
 \item{graph_id}{the graph to which to add the edges and vertices. Should
@@ -16,9 +15,6 @@ be of type \code{chickenwire}.}
 source vertex id's of the edge and destination id's. By default it is assumed 
 that these are in the first two columns of the data.frame (see \code{edge_src_col}
 and \code{edge_dst_col}).}
-
-\item{vertices}{a data.frame with vertices (optional). By default it is assumed that
-the first column contains the vertex id's (see \code{vertex_id_col}).}
 
 \item{edge_src_col}{name or number of the column from \code{edges} containing the source 
 vertex id's of the edges. Column should contain integer values.}
@@ -33,10 +29,7 @@ numeric values.}
 \item{edge_type_col}{name or number of the column from \code{edges} containing the types 
 of the edges. When omitted all edges have type 1. Should be of type integer.}
 
-\item{vertex_id_col}{name or number of the column from \code{vertices} containing
-the id's of the vertices. Should contain integer values.}
-
-\item{add_vertices}{automatically create vertices when an edge contains id's that
+\item{auto_add_vertices}{automatically create vertices when an edge contains id's that
 do not exist yet. When \code{vertices} is given this parameter is set to \code{FALSE}.}
 }
 \value{
@@ -58,8 +51,8 @@ delete_graph(g)
 # Create graph with four vertices and 5 edges between them; one of the
 # vertices does not have edges.
 g <- create_graph()
-g <- add_edges(g, data.frame(src = c(1,1,2,2,3), dst = c(2,3,1,3,1)),
-  vertices = data.frame(id = c(1,2,3,4)))
+g <- add_vertices(g, 1:4)
+g <- add_edges(g, data.frame(src = c(1,1,2,2,3), dst = c(2,3,1,3,1)))
 print(g)
 delete_graph(g)
 
