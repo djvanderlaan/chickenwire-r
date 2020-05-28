@@ -4,8 +4,14 @@
 \alias{add_edges_raw}
 \title{Raw/direct interface for adding edges to graph}
 \usage{
-add_edges_raw(graph_id, edges, edge_src_col = 1, edge_dst_col = 2,
-  edge_weight_col, edge_type_col)
+add_edges_raw(
+  graph_id,
+  edges,
+  edge_src_col = 1,
+  edge_dst_col = 2,
+  edge_weight_col,
+  edge_type_col
+)
 }
 \arguments{
 \item{graph_id}{the graph to which to add the edges and vertices. Should

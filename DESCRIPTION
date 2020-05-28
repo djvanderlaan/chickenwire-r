@@ -12,4 +12,4 @@ Depends: R (>= 3.5.0)
 Imports: Rcpp (>= 1.0.0), methods
 LinkingTo: Rcpp
 SystemRequirements: C++11
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

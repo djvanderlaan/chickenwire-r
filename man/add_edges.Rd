@@ -4,8 +4,15 @@
 \alias{add_edges}
 \title{Add edges to graph}
 \usage{
-add_edges(graph_id, edges, edge_src_col = 1, edge_dst_col = 2,
-  edge_weight_col, edge_type_col, auto_add_vertices = TRUE)
+add_edges(
+  graph_id,
+  edges,
+  edge_src_col = 1,
+  edge_dst_col = 2,
+  edge_weight_col,
+  edge_type_col,
+  auto_add_vertices = TRUE
+)
 }
 \arguments{
 \item{graph_id}{the graph to which to add the edges and vertices. Should
